@@ -1,8 +1,12 @@
 import 'package:chat_app/login_form.dart';
 import 'package:chat_app/register_form.dart';
+import 'package:chat_app/room.dart';
+import 'package:chat_app/routes.dart';
 import 'package:flutter/material.dart';
+import 'config.dart';
 
-void main() {
+Future<void> main() async {
+  await Config.init();
   runApp(const Chat());
 }
 
@@ -15,8 +19,9 @@ class Chat extends StatelessWidget {
     return MaterialApp(
       title: 'Chat',
       routes: {
-        '/login': (context) => const LoginForm(),
-        '/register': (context) => const RegisterForm(),
+        routes[RouteName.login]!: (context) => const LoginForm(),
+        routes[RouteName.register]!: (context) => const RegisterForm(),
+        routes[RouteName.room]!: (context) => const Room(),
       },
       theme: ThemeData(
         brightness: Brightness.dark,
@@ -37,9 +42,10 @@ class ChatHomePage extends StatefulWidget {
 }
 
 class _ChatHomePageState extends State<ChatHomePage> {
-  void _toRegister() => Navigator.pushNamed(context, '/register');
+  void _toRegister() =>
+      Navigator.pushNamed(context, routes[RouteName.register]!);
 
-  void _toLogin() => Navigator.pushNamed(context, '/login');
+  void _toLogin() => Navigator.pushNamed(context, routes[RouteName.login]!);
 
   @override
   Widget build(BuildContext context) {
@@ -72,9 +78,7 @@ class _ChatHomePageState extends State<ChatHomePage> {
                           )),
                       Text('WhyChat a simple useless app',
                           style: TextStyle(
-                            fontSize: 20.0,
-                            fontStyle: FontStyle.italic
-                          ))
+                              fontSize: 20.0, fontStyle: FontStyle.italic))
                     ],
                   ),
                 ),

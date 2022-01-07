@@ -6,7 +6,9 @@ class RegisterForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var _formKey = GlobalKey<FormState>();
-    var _controller = TextEditingController();
+    var _userController = TextEditingController();
+    var _emailController = TextEditingController();
+    var _passwordController = TextEditingController();
 
     return Scaffold(
       appBar: AppBar(
@@ -16,25 +18,58 @@ class RegisterForm extends StatelessWidget {
           child: Form(
               key: _formKey,
               child: Column(children: <Widget>[
-                TextFormField(
-                    decoration: const InputDecoration(
-                      border: UnderlineInputBorder(),
-                      labelText: 'Enter your username',
-                    ),
-                    controller: _controller,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter some text';
-                      }
-                      return null;
-                    }),
+                Container(
+                    margin: const EdgeInsets.only(bottom: 10, top: 10),
+                    child: TextFormField(
+                        decoration: const InputDecoration(
+                          border: UnderlineInputBorder(),
+                          labelText: 'Enter your username',
+                        ),
+                        controller: _userController,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter the username';
+                          }
+                          return null;
+                        })),
+                Container(
+                    margin: const EdgeInsets.only(bottom: 10, top: 10),
+                    child: TextFormField(
+                        decoration: const InputDecoration(
+                          border: UnderlineInputBorder(),
+                          labelText: 'Enter your email',
+                        ),
+                        controller: _emailController,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter the email';
+                          }
+                          if (!value.contains("@")) {
+                            return 'Enter a valid email';
+                          }
+                          return null;
+                        })),
+                Container(
+                    margin: const EdgeInsets.only(bottom: 10, top: 10),
+                    child: TextFormField(
+                      decoration: const InputDecoration(
+                        border: UnderlineInputBorder(),
+                        labelText: 'Enter your password',
+                      ),
+                      validator: (value) => value == null || value.isEmpty
+                          ? "Please enter a valid password"
+                          : null,
+                      controller: _passwordController,
+                      obscureText: true,
+                    )),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 16.0),
                   child: ElevatedButton(
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text(_controller.text)),
+                          const SnackBar(
+                              content: Text("Register your user....")),
                         );
                       }
                     },
