@@ -150,7 +150,7 @@ packages:
       name: http
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.13.5"
+    version: "0.13.6"
   http_methods:
     dependency: transitive
     description:
@@ -390,4 +390,4 @@ packages:
     source: git
     version: "1.0.0"
 sdks:
-  dart: ">=2.18.0 <3.0.0"
+  dart: ">=2.19.0 <3.0.0"
