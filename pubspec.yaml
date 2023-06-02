@@ -28,7 +28,7 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   http: ^0.13.6
-  flutter_dotenv: ^5.0.2
+  flutter_dotenv: ^5.1.0
   whychat:
     git:
       url: https://github.com/bozzaccio/whychat-server.git
